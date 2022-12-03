@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
+import ExpensesList from './ExpensesList';
 
 function Expenses(props) {
   //notes
@@ -11,39 +11,26 @@ function Expenses(props) {
   //in our ExpenseFilter file, we set the value of our input to
   //'props.selected' which takes the filteredYear here
   //and set the value of the dropdown box to that date on load
+  const [filteredYear, setFilteredYear] = useState('2020');
 
-  const [ filteredYear, setFilteredYear] = useState('2020');
-
-  const filterChangeHandler = (selectedYear) => {
+  const filterChangedHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
 
     console.log(selectedYear);
   };
 
+  const filteredExpense = props.items.filter((item) => {
+    return item.date.getFullYear().toString() === filteredYear;
+  });
+
   return (
     <div>
       <Card className="expenses">
-        <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
-        <ExpenseItem
-          title={props.items[0].title}
-          amount={props.items[0].amount}
-          date={props.items[0].date}
+        <ExpenseFilter
+          onFilterChange={filterChangedHandler}
+          selected={filteredYear}
         />
-        <ExpenseItem
-          title={props.items[1].title}
-          amount={props.items[1].amount}
-          date={props.items[1].date}
-        />
-        <ExpenseItem
-          title={props.items[2].title}
-          amount={props.items[2].amount}
-          date={props.items[2].date}
-        />
-        <ExpenseItem
-          title={props.items[3].title}
-          amount={props.items[3].amount}
-          date={props.items[3].date}
-        />
+        <ExpensesList items={filteredExpense}/>
       </Card>
     </div>
   );

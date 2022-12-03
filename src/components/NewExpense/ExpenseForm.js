@@ -16,7 +16,7 @@ function ExpenseForm(props) {
     };
 
     props.onSaveExpenseData(expenseData); //this takes our expenseData
-    //and add its to the onSaveExpenseData function in our parent, NewExpense.js
+    //and adds its to the onSaveExpenseData function in our parent, NewExpense.js
 
     setEnteredTitle(''); //this is an exmaple of 2 way binding
     setEnteredAmount(''); //below we use our useState to set values to inputs
@@ -73,6 +73,7 @@ function ExpenseForm(props) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={props.onCancel} type='button'>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
