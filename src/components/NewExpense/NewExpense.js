@@ -5,12 +5,18 @@ import ExpenseForm from './ExpenseForm';
 
 function NewExpense(props) {
   const saveExpenseDataHandler = (enteredExpenseData) => {
-    hideForm();
     const expenseData = {
       ...enteredExpenseData,
       id: Math.random().toString(),
     };
-    props.onAddExpense(expenseData);
+
+    if(!Object.values(expenseData).some(item => item === null || item === '')){
+      hideForm();
+      props.onAddExpense(expenseData);
+      console.log('hideform');
+    } else {
+      alert('please fill out form')
+    }
   };
 
   const [viewForm, setViewForm] = useState(false);
