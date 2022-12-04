@@ -42,6 +42,7 @@ function ExpenseForm(props) {
 
   return (
     <form onSubmit={submitHandler}>
+    {props.onFormStatus && <p>Please enter all information.</p>}
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
