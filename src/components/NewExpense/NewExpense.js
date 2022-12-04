@@ -4,10 +4,9 @@ import './NewExpense.css';
 import ExpenseForm from './ExpenseForm';
 
 function NewExpense(props) {
-  const [alertStatus, setAlertStatus] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(false);
   const [viewForm, setViewForm] = useState(false);
-
-
+  
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -28,11 +27,11 @@ function NewExpense(props) {
 
   const hideForm = () => {
     setViewForm(false);
-    setAlertStatus(false);
+    setAlertMessage(false);
   };
 
   const showFormAlert = () => {
-    setAlertStatus(true);
+    setAlertMessage(true);
   }
 
   return (
@@ -40,7 +39,7 @@ function NewExpense(props) {
       {viewForm === false ? (
         <button onClick={showForm}>Add New Expense</button>
       ) : (
-        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancel={hideForm} onFormStatus={alertStatus}/>
+        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancel={hideForm} onFormStatus={alertMessage}/>
       )}
     </div>
   );
